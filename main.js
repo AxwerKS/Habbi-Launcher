@@ -2,15 +2,41 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 let mainWindow;
 
+
+
+
+
+const path = require('path')
+// const PEPPERFLASH_PLUGIN = __dirname.indexOf("asar") >=0 ? 'resources/resources/pepperflashplugin.dll' : 'resources/resources/pepperflashplugin.dll'
+// let pluginName
+// pluginName = PEPPERFLASH_PLUGIN
+// pluginName = '../../resources/pepperflashplugin.dll'
+// astecagay = path.join(__dirname, pluginName)
+// app.commandLine.appendSwitch('ppapi-flash-path', astecagay)
+// let flashPath = path.join(__dirname, pluginName);
+localflash = 'C:/Users/Caique/Desktop/Launcher/dist/win-unpacked/resources/resources/pepperflashplugin.dll'
+app.commandLine.appendSwitch('ppapi-flash-path', localflash);
+// app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, pluginName))
+// app.commandLine.appendSwitch('ppapi-flash-path', astecagay)
+app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.344');
+
+
+
+
+
+
 function createWindow () {
   mainWindow = new BrowserWindow({
+	title: localflash,
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+	  plugins: true
     },
   });
-  mainWindow.loadFile('index.html');
+  // mainWindow.loadFile('index.html');
+  mainWindow.loadURL('https://get.adobe.com/br/flashplayer/about/');
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
